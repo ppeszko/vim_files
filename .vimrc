@@ -242,7 +242,7 @@ set noerrorbells        " do not make noise
 "set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
 set listchars=tab:▸\ ,eol:¬
 let ruby_space_errors = 1
-
+set list
 " set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:‗,eol:↵
                         " how :set list show
 set magic               " set magic on

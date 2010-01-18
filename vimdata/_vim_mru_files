@@ -1,6 +1,8 @@
 # Most recently edited files in Vim (version 3.0)
-/Users/pascal.friederich/.vim/colors/railscasts.vim
+/Users/pascal.friederich/bla.rb
+/Users/pascal.friederich/Code/rails/rails-app/engines/best_offers/app/controllers/best_offers/backend_controller.rb
 /Users/pascal.friederich/.vimrc
+/Users/pascal.friederich/.vim/colors/railscasts.vim
 /Users/pascal.friederich/Code/rails/rails-app/engines/invites/app/views/invites/addressbooks/show.html.erb
 /Users/pascal.friederich/Code/rails/rails-app/engines/invites/app/controllers/invites/addressbooks_controller.rb
 /Users/pascal.friederich/Code/rails/rails-app/engines/invites/init.rb
@@ -17,5 +19,3 @@
 /Users/pascal.friederich/Code/ruby/xing-logging/VERSION
 /Users/pascal.friederich/Code/rails/shared/gems-d3894767218e0ceef2a3d51e90463695c70a95d4/gems/xing-logging-2.1.0/lib/logging/amqp_logging.rb
 /Users/pascal.friederich/.vim/ruby/fuzzy_file_finder.rb
-/Users/pascal.friederich/Desktop/magic.rb
-/Users/pascal.friederich/Code/rails/shared/gems-d3894767218e0ceef2a3d51e90463695c70a95d4/gems/bunny-0.6.0/lib/bunny.rb
