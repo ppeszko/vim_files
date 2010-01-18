@@ -142,7 +142,7 @@ if has("win32")
 elseif has("gui_gtk2")
   set gfn="Consolas 12"
 else
-  set gfn=Consolas:h13,Inconsolata:h14,PanicSans:h12
+  set gfn=ProggyCleanTT:h11,Monaco:h14,Consolas:h13,Inconsolata:h14,PanicSans:h12
 endif
 
 " matchparentesis is pretty slow on big files :(
@@ -157,7 +157,7 @@ if has("gui_running")
   set guioptions=agme
   set tabpagemax=30
   set mousehide
-
+  colo railscasts
   set columns=170
   if has("gui_gtk2")
     set lines=56
@@ -171,31 +171,14 @@ if has("gui_running")
   endif
 
   let psc_style='cool'
-
-  "colo ps_color
-  " colo desert
-  colo wombat
-
 else
   set title
-  "set background=light
-  "colo ir_black
+	colo proton 
   if $TERM == "rxvt-unicode"
     set t_Co=256
-    "colo desert256
-    colo wombatc
-    " colo desertc
-    " colo leo    
-    " colo gardener
-    " colo inkpot
-
-  elseif $TERM == "xterm-color"
-    colo desert
-  else
-    "colo desert
-    colo wombat
   endif
 endif
+
 
 set runtimepath+=$VIMFILES/runtime/theonevimlib/core
 set runtimepath+=$VIMFILES/runtime/theonevimlib/contrib
