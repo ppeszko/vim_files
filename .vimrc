@@ -198,8 +198,8 @@ if has("win32")
   runtime plugin/visual_studio.vim
 endif
 
-" runtime plugin/snipMate.vim
-" runtime after/plugin/snipMate.vim
+"runtime plugin/snipMate.vim
+"runtime after/plugin/snipMate.vim
 runtime plugin/NERD_tree.vim
 runtime plugin/NERD_snippets.vim
 runtime plugin/NERD_commenter.vim
@@ -207,6 +207,7 @@ runtime plugin/git.vim
 " matchit fun
 runtime macros/matchit.vim
 " }}}1
+runtime plugin/surround.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual Cues: {{{1
@@ -238,7 +239,10 @@ map <silent> <leader><cr> :noh<cr>
 set visualbell
 set t_vb=
 set noerrorbells        " do not make noise
-set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
+"set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
+set listchars=tab:▸\ ,eol:¬
+let ruby_space_errors = 1
+
 " set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:‗,eol:↵
                         " how :set list show
 set magic               " set magic on

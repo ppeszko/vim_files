@@ -94,3 +94,9 @@ hi SpellBad                  guifg=#D70000 ctermfg=160 ctermbg=NONE cterm=underl
 hi SpellRare                 guifg=#D75F87 ctermfg=168 guibg=NONE ctermbg=NONE gui=underline cterm=underline
 hi SpellCap                  guifg=#D0D0FF ctermfg=189 guibg=NONE ctermbg=NONE gui=underline cterm=underline
 hi MatchParen                guifg=#FFFFFF ctermfg=15 guibg=#005f5f ctermbg=23
+
+" invisible key character colors
+hi NonText guifg=#4a4a59
+hi specialKey guifg=#4a4a59
+
+hi ExtraWhitespace ctermbg=red guibg=red
