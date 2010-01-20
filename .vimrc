@@ -80,6 +80,7 @@
 "      :h keyword OR :helpgrep keyword OR press K (<S-k>) over it.
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:GetLatestVimScripts_allowautoinstall=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General: {{{1
@@ -807,28 +808,28 @@ map <leader>s? z=
   " => fuzzyfinder.vim
   """"""""""""""""""""""""""""""
   " Fuzzy finder rocks, like Command-T in TextMate (buggy at moment, fix!!)
-  let g:FuzzyFinderOptions = { 'Base':{}, 'Bookmark':{}, 'Buffer':{}, 'File':{}, 'Dir':{}, 'MruFile':{}, 'MruCmd':{}, 'Tag':{}, 'TaggedFile':{}}
-  let g:FuzzyFinderOptions.Buffer.mode_available = 1
-  let g:FuzzyFinderOptions.Bookmark.mode_available = 1
-  let g:FuzzyFinderOptions.File.mode_available = 1
-  let g:FuzzyFinderOptions.MruFile.mode_available = 1
-  let g:FuzzyFinderOptions.MruCmd.mode_available = 0
-  let g:FuzzyFinderOptions.Dir.mode_available = 1
-  let g:FuzzyFinderOptions.Tag.mode_available = 1
-  let g:FuzzyFinderOptions.TaggedFile.mode_available = 0
-  let g:FuzzyFinderOptions.Base.abbrev_map = { "^Project-" : ["**/"], }
-  let g:FuzzyFinderOptions.Base.migemo_support = 0
-  "let g:FuzzyFinderOptions.Base.key_open_split = '<C-O>'
-  let g:FuzzyFinderOptions.File.excluded_path = '\v\~$|\.obj$|\.jpg$|\.gif$|\.o$|\./|\.git/|\.svn/|\.DS_Store|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)'
-  noremap <silent> <leader>fp :FuzzyFinderFile Project-<CR>
-  noremap <silent> <leader>ff :FuzzyFinderFile<CR>
-  noremap <silent> <leader>fb :FuzzyFinderBuffer<CR>
-  noremap <silent> <leader>fm :FuzzyFinderMruFile<CR>
-  noremap <silent> <leader>fv :FuzzyFinderBookmark<CR>
-  noremap <silent> <leader>fa :FuzzyFinderAddBookmark<CR>
-  noremap <silent> <leader>fd :FuzzyFinderDir<CR>
-  noremap <silent> <leader>ft :FuzzyFinderTag<CR>
-  noremap <silent> <leader>fc :FuzzyFinderRenewCache<CR>
+  let g:FufOptions = { 'Base':{}, 'Bookmark':{}, 'Buffer':{}, 'File':{}, 'Dir':{}, 'MruFile':{}, 'MruCmd':{}, 'Tag':{}, 'TaggedFile':{}}
+  let g:FufOptions.Buffer.mode_available = 1
+  let g:FufOptions.Bookmark.mode_available = 1
+  let g:FufOptions.File.mode_available = 1
+  let g:FufOptions.MruFile.mode_available = 1
+  let g:FufOptions.MruCmd.mode_available = 0
+  let g:FufOptions.Dir.mode_available = 1
+  let g:FufOptions.Tag.mode_available = 1
+  let g:FufOptions.TaggedFile.mode_available = 0
+  let g:FufOptions.Base.abbrev_map = { "^Project-" : ["**/"], }
+  let g:FufOptions.Base.migemo_support = 0
+  "let g:FufOptions.Base.key_open_split = '<C-O>'
+  let g:FufOptions.File.excluded_path = '\v\~$|\.obj$|\.jpg$|\.gif$|\.o$|\./|\.git/|\.svn/|\.DS_Store|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)'
+  noremap <silent> <leader>fp :FufFile Project-<CR>
+  noremap <silent> <leader>ff :FufFile<CR>
+  noremap <silent> <leader>fb :FufBuffer<CR>
+  noremap <silent> <leader>fm :FufMruFile<CR>
+  noremap <silent> <leader>fv :FufBookmark<CR>
+  noremap <silent> <leader>fa :FufAddBookmark<CR>
+  noremap <silent> <leader>fd :FufDir<CR>
+  noremap <silent> <leader>ft :FufTag<CR>
+  noremap <silent> <leader>fc :FufRenewCache<CR>
   noremap <silent> <leader>t :FuzzyFinderTextMate<CR>
   noremap <silent> <leader>fr :FuzzyFinderTextMateRefreshFiles<CR>
 

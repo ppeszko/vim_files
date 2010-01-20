@@ -1,4 +1,9 @@
 # Most recently edited files in Vim (version 3.0)
+/Users/paukul/Code/ruby/zool/Gemfile
+/Users/paukul/.vim/plugin/fuzzyfinder_textmate.vim
+/Users/paukul/.vimrc
+/Users/paukul/.vim/plugin/fuf.vim
+/Users/paukul/.vim/ruby/fuzzy_file_finder.rb
 /Users/pascal.friederich/bla.rb
 /Users/pascal.friederich/Code/rails/rails-app/engines/best_offers/app/controllers/best_offers/backend_controller.rb
 /Users/pascal.friederich/.vimrc
@@ -14,8 +19,3 @@
 /Users/pascal.friederich/Code/ruby/xing-logging/.git/COMMIT_EDITMSG
 /Users/pascal.friederich/Code/ruby/xing-logging/lib/logging/amqp_logging.rb
 /Users/pascal.friederich/Code/rails/rails-app/config/gems.yml
-/Users/pascal.friederich/Code/rails/rails-app/.git/config
-/Users/pascal.friederich/Code/rails/rails-app/gems/gems/xing-logging-2.1.0/lib/logging/hodel_3000_compliant_logger.rb
-/Users/pascal.friederich/Code/ruby/xing-logging/VERSION
-/Users/pascal.friederich/Code/rails/shared/gems-d3894767218e0ceef2a3d51e90463695c70a95d4/gems/xing-logging-2.1.0/lib/logging/amqp_logging.rb
-/Users/pascal.friederich/.vim/ruby/fuzzy_file_finder.rb

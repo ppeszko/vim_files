@@ -2,7 +2,7 @@
 # ==================================================================
 # Author: Jamis Buck (jamis@jamisbuck.org)
 # Date: 2008-10-09
-# 
+#
 # This file is in the public domain. Usage, modification, and
 # redistribution of this file are unrestricted.
 # ==================================================================
@@ -11,9 +11,9 @@
 # The "fuzzy" file finder provides a way for searching a directory
 # tree with only a partial name. This is similar to the "cmd-T"
 # feature in TextMate (http://macromates.com).
-# 
+#
 # Usage:
-# 
+#
 #   finder = FuzzyFileFinder.new
 #   finder.search("app/blogcon") do |match|
 #     puts match[:highlighted_path]
@@ -24,10 +24,10 @@
 # expression internally, so that any file that contains those
 # characters in that order (even if there are other characters
 # in between) will match.
-# 
+#
 # In other words, "app/blogcon" would match any of the following
 # (parenthesized strings indicate how the match was made):
-# 
+#
 # * (app)/controllers/(blog)_(con)troller.rb
 # * lib/c(ap)_(p)ool/(bl)ue_(o)r_(g)reen_(co)loratio(n)
 # * test/(app)/(blog)_(con)troller_test.rb
@@ -125,7 +125,6 @@ class FuzzyFileFinder
 
     @ignores = Array(ignores)
 
-    @last_scanned = Time.at(0)
     rescan!
   end
 
@@ -133,11 +132,8 @@ class FuzzyFileFinder
   # you'll need to call this to force the finder to be aware of
   # the changes.
   def rescan!
-    if Time.now - @last_scanned > 10
-      @last_scanned = Time.now
-      @files.clear
-      roots.each { |root| follow_tree(root) }
-    end
+    @files.clear
+    roots.each { |root| follow_tree(root) }
   end
 
   # Takes the given +pattern+ (which must be a string) and searches
@@ -189,19 +185,11 @@ class FuzzyFileFinder
     file_regex = Regexp.new(file_regex_raw, Regexp::IGNORECASE)
 
     path_matches = {}
-    file_matcher = lambda do |file|
+    files.each do |file|
       path_match = match_path(file.parent, path_matches, path_regex, path_parts.length)
       next if path_match[:missed]
 
-      if file_match = file.name.match(file_regex)
-        match_file(file, file_match, path_match, &block)
-      end
-    end
-
-    results = files.map(&file_matcher)
-    if results.compact.empty? and rescan!
-      path_matches.clear
-      results = files.map(&file_matcher)
+      match_file(file, file_regex, path_match, &block)
     end
   end
 
@@ -221,13 +209,6 @@ class FuzzyFileFinder
   def inspect #:nodoc:
     "#<%s:0x%x roots=%s, files=%d>" % [self.class.name, object_id, roots.map { |r| r.name.inspect }.join(", "), files.length]
   end
-  
-  def score_for_name_and_query(name, query)
-    raw = "^(.*?)" + make_pattern(query) + "(.*)$"
-    rex = Regexp.new(raw, Regexp::IGNORECASE)
-    m = name.match(rex)
-    build_match_result(m, 1)[:score]
-  end
 
   private
 
@@ -236,11 +217,12 @@ class FuzzyFileFinder
     def follow_tree(directory)
       Dir.entries(directory.name).each do |entry|
         next if entry[0,1] == "."
+        next if ignore?(directory.name) # Ignore whole directory hierarchies
         raise TooManyEntries if files.length > ceiling
 
         full = File.join(directory.name, entry)
 
-        if File.directory?(full) && File.readable?(full)
+        if File.directory?(full)
           follow_tree(Directory.new(full))
         elsif !ignore?(full.sub(@shared_prefix_re, ""))
           files.push(FileSystemEntry.new(directory, entry))
@@ -298,28 +280,13 @@ class FuzzyFileFinder
       #    is better.
       # 2. better coverage of the actual path name is better
 
-      nr_inside_runs = runs.select { |r| r.inside }.length
-      mergeable = false
-      mid_sentence_hit = false
-      (0..(match.captures.length / 2 - 1)).each do |x| 
-        i = 2 * x + 1
-        c = match.captures[i]
-        mid_sentence_hit ||= match.captures[i-1][-1,1] =~ /[-_]$/
-        mergeable ||= match.captures[i+1][-c.length,c.length] == c
-      end
-      if mergeable
-        nr_inside_runs -= 1
-      end
-      run_ratio = nr_inside_runs.zero? ? 1 : inside_segments / nr_inside_runs.to_f
+      inside_runs = runs.select { |r| r.inside }
+      run_ratio = inside_runs.length.zero? ? 1 : inside_segments / inside_runs.length.to_f
 
       char_ratio = total_chars.zero? ? 1 : inside_chars.to_f / total_chars
 
-      score = char_ratio * (run_ratio ** 2)
-      score *= 2 if match.captures[0].length == 0
-      score *= 2 if mid_sentence_hit == 0
-      score /= 2 if match.string =~ /\.(gif|jpg|png|tiff|exe|pdf|doc|xls|ppt)$/
-      
-      score = 0.001 if score == 0
+      score = run_ratio * char_ratio
+
       return { :score => score, :result => runs.join }
     end
 
@@ -344,24 +311,25 @@ class FuzzyFileFinder
       end
     end
 
-    # Determine match metadata and them to the block.
-    def match_file(file, file_match, path_match, &block)
-      match_result = build_match_result(file_match, 1)
-      full_match_result = path_match[:result].empty? ? match_result[:result] : File.join(path_match[:result], match_result[:result])
-      shortened_path = path_match[:result].gsub(/[^\/]+/) { |m| m.index("(") ? m : m[0,1] }
-      abbr = shortened_path.empty? ? match_result[:result] : File.join(shortened_path, match_result[:result])
+    # Match +file+ against +file_regex+. If it matches, yield the match
+    # metadata to the block.
+    def match_file(file, file_regex, path_match, &block)
+      if file_match = file.name.match(file_regex)
+        match_result = build_match_result(file_match, 1)
+        full_match_result = path_match[:result].empty? ? match_result[:result] : File.join(path_match[:result], match_result[:result])
+        shortened_path = path_match[:result].gsub(/[^\/]+/) { |m| m.index("(") ? m : m[0,1] }
+        abbr = shortened_path.empty? ? match_result[:result] : File.join(shortened_path, match_result[:result])
 
-      result = { :path => file.path,
-                 :relative_path => File.join(file.parent.name.gsub(shared_prefix, ""), file.name),
-                 :abbr => abbr,
-                 :directory => file.parent.name,
-                 :name => file.name,
-                 :highlighted_directory => path_match[:result],
-                 :highlighted_name => match_result[:result],
-                 :highlighted_path => full_match_result,
-                 :score => path_match[:score] * match_result[:score] }
-      yield result
-      return true
+        result = { :path => file.path,
+                   :abbr => abbr,
+                   :directory => file.parent.name,
+                   :name => file.name,
+                   :highlighted_directory => path_match[:result],
+                   :highlighted_name => match_result[:result],
+                   :highlighted_path => full_match_result,
+                   :score => path_match[:score] * match_result[:score] }
+        yield result
+      end
     end
 
     def determine_shared_prefix
@@ -384,3 +352,4 @@ class FuzzyFileFinder
       return roots.first.name
     end
 end
+
