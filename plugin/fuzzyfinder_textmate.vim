@@ -87,9 +87,9 @@ ruby << RUBY
   end
 RUBY
 
-  let g:FuzzyFinderMode.TextMate = copy(g:FuzzyFinderMode.File)   " Base does not define 'on_open' anymore
+  let g:FufMode.TextMate = copy(g:FuzzyFinderMode.Base)
 
-  function! g:FuzzyFinderMode.TextMate.on_complete(base)
+  function! g:FufMode.TextMate.on_complete(base)
     if exists('g:fuzzy_enumerating_limit')
       let l:enumerating_limit = g:fuzzy_enumerating_limit
     else
@@ -116,19 +116,19 @@ RUBY
   endfunction
 
   function! FuzzyFinderTextMateLauncher(initial_text, partial_matching)
-    call g:FuzzyFinderMode.TextMate.launch_base(a:initial_text, a:partial_matching)
+    call g:FufMode.TextMate.launch(a:initial_text, a:partial_matching)
   endfunction
-
-  let g:FuzzyFinderOptions.TextMate = copy(g:FuzzyFinderOptions.File)
+  
+  let g:FufOptions.TextMate = copy(g:FufOptions.File)
 endfunction "}}}
 
 if !exists('loaded_fuzzyfinder') "{{{
   function! FuzzyFinderTextMateLauncher(initial_text, partial_matching)
     call InstantiateTextMateMode()
     function! FuzzyFinderTextMateLauncher(initial_text, partial_matching)
-      call g:FuzzyFinderMode.TextMate.launch(a:initial_text, a:partial_matching)
+      call g:FufMode.TextMate.launch(a:initial_text, a:partial_matching)
     endfunction
-    call g:FuzzyFinderMode.TextMate.launch(a:initial_text, a:partial_matching)
+    call g:FufMode.TextMate.launch(a:initial_text, a:partial_matching)
   endfunction
   finish
 end "}}}

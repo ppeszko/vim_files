@@ -1,4 +1,6 @@
 # Most recently edited files in Vim (version 3.0)
+/Users/pascal.friederich/.vim/.netrwhist
+/Users/pascal.friederich/.vim/vimdata/_vim_mru_files
 /Users/pascal.friederich/.vim/.git/COMMIT_EDITMSG
 /Users/pascal.friederich/.vim/.vimrc
 /Users/pascal.friederich/.vim/plugin/fuzzyfinder.vim
@@ -17,5 +19,3 @@
 /Users/pascal.friederich/Code/rails/rails-app/engines/best_offers/app/controllers/best_offers/backend_controller.rb
 /Users/pascal.friederich/Code/rails/rails-app/engines/invites/app/views/invites/addressbooks/show.html.erb
 /Users/pascal.friederich/Code/rails/rails-app/engines/invites/init.rb
-/Users/pascal.friederich/Code/rails/rails-app/config/app_config.rb
-/Users/pascal.friederich/Code/rails/rails-app/engines/events/app/controllers/events/events_controller.rb
