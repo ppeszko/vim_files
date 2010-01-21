@@ -233,18 +233,19 @@ set ignorecase
 set smartcase           " the case of normal letters is ignored except when upper is used
 set hlsearch            " highlight all searched for phrases
 set incsearch           " highlight where the typed pattern matches
-map <silent> <leader><cr> :noh<cr>
-                        " remove the highlight searched phrases
 "set novisualbell        " use visual bell instead of beeping
 set visualbell
 set t_vb=
 set noerrorbells        " do not make noise
 "set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
-set listchars=tab:▸\ ,eol:¬
 let ruby_space_errors = 1
 set list
 " set listchars=tab:»\ ,trail:·,extends:>,precedes:<,nbsp:‗,eol:↵
-                        " how :set list show
+if has("multi_byte_encoding")
+  set listchars=tab:▸\ ,eol:¬
+else
+  set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$
+endif
 set magic               " set magic on
 set completeopt=menu    " use popup menu to show possible completions
 " set foldenable          " enable folding, I find it very useful

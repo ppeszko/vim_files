@@ -99,4 +99,4 @@ hi MatchParen                guifg=#FFFFFF ctermfg=15 guibg=#005f5f ctermbg=23
 hi NonText guifg=#4a4a59
 hi specialKey guifg=#4a4a59
 
-hi ExtraWhitespace ctermbg=red guibg=red
+hi ExtraWhitespace ctermbg=red guibg=#66FFEE

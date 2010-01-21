@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/private/tmp/rabbitmq-munin'
+let g:netrw_dirhist_2='/Users/pascal.friederich/Code/xing/rabbitmq-munin'
+let g:netrw_dirhist_3='/Users/pascal.friederich/Code/rails/shared/gems-afaecc7071da3d2040faf683e65d8b109d2bc51a/gems/amqp-0.6.5'
