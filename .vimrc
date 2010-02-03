@@ -143,7 +143,7 @@ if has("win32")
 elseif has("gui_gtk2")
   set gfn="Consolas 12"
 else
-  set gfn=ProggyCleanTT:h11,Monaco:h14,Consolas:h13,Inconsolata:h14,PanicSans:h12
+  set gfn=Monaco:h12,Inconsolata:h14,Consolas:h13,PanicSans:h12
 endif
 
 " matchparentesis is pretty slow on big files :(
@@ -577,9 +577,9 @@ set directory=$VIMDATA/temp
 set fo=tcrqnmM		      " see help formatoptions (complex)
 set linebreak           " wrap long lines at a character in 'breakat'
 set textwidth=500       " maximum width of text that is being inserted
-" set ai                  " autoindent
-" set si                  " smartindent
-" set cindent             " do C-style indenting
+set ai                  " autoindent
+set si                  " smartindent
+set cindent             " do C-style indenting
 set cino=(0
 " set copyindent
 set wrap                " wrap lines
@@ -667,7 +667,7 @@ map <leader>s? z=
   if has("win32")
     let Tlist_Ctags_Cmd = $VIMFILES.'\ctags.exe'
   elseif has("mac")
-    let Tlist_Ctags_Cmd = '/opt/local/gentoo/usr/bin/ctags'
+    let Tlist_Ctags_Cmd = '/opt/local/bin/ctags'
   endif
 
   let Tlist_Sort_Type = "name"         " order by name
