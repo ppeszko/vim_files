@@ -1,3 +1,4 @@
 .DS_Store
 plugin_disabled
 vimdata/temp/*.sw?
+vimdata/_vim_mru_files
