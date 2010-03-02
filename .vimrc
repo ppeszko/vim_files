@@ -126,7 +126,7 @@ au! BufWritePost [\._]vimrc source $MYVIMRC
 set pastetoggle=<F6>    " when pasting something in, don't indent
 set rtp+=$VIMDATA       " add this to rtp to satisfy getscript.vim
 set path=.,/usr/include/*, " where gf, ^Wf, :find will search
-set tags=./tags,tags,.tmtags    " used by CTRL-] together with ctags
+set tags=./tags,tags,.tmtags,~/.ctags/tags    " used by CTRL-] together with ctags
 set makeef=error.err    " the errorfile for :make and :grep
 set ffs=unix,dos,mac    " behaves good under both linux/windows
 nmap <leader>fd :se ff=dos<cr>
