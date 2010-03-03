@@ -158,7 +158,7 @@ if has("gui_running")
   set guioptions=agme
   set tabpagemax=30
   set mousehide
-  colo railscasts
+  colo cswombat
   set columns=170
   if has("gui_gtk2")
     set lines=56
@@ -1072,7 +1072,7 @@ let g:xml_use_xhtml = 1
 let g:xml_use_html = 1
 
 let g:rails_default_database="mysql"
-
+let g:rails_menu = 0
 
 " jump to line at cursor
 map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
