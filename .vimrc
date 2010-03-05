@@ -158,7 +158,7 @@ if has("gui_running")
   set guioptions=agme
   set tabpagemax=30
   set mousehide
-  colo wombat
+  colo desert
   set columns=170
   if has("gui_gtk2")
     set lines=56
