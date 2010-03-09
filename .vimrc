@@ -126,7 +126,7 @@ au! BufWritePost [\._]vimrc source $MYVIMRC
 set pastetoggle=<F6>    " when pasting something in, don't indent
 set rtp+=$VIMDATA       " add this to rtp to satisfy getscript.vim
 set path=.,/usr/include/*, " where gf, ^Wf, :find will search
-set tags=./tags,tags,.tmtags,~/.ctags/tags    " used by CTRL-] together with ctags
+set tags=./tags,tags,.tmtags,~/.ctags/tags" used by CTRL-] together with ctags
 set makeef=error.err    " the errorfile for :make and :grep
 set ffs=unix,dos,mac    " behaves good under both linux/windows
 nmap <leader>fd :se ff=dos<cr>
@@ -821,7 +821,7 @@ map <leader>s? z=
   let g:FufOptions.Base.abbrev_map = { "^Project-" : ["**/"], }
   let g:FufOptions.Base.migemo_support = 0
   "let g:FufOptions.Base.key_open_split = '<C-O>'
-  let g:FufOptions.File.excluded_path = '\v\~$|\.obj$|\.jpg$|\.gif$|\.o$|\./|\.git/|\.svn/|\.DS_Store|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)'
+  let g:FufOptions.File.excluded_path = '\v\~$|gems/$|\.obj$|\.jpg$|\.gif$|\.o$|\./|\.git/|\.svn/|\.DS_Store|\.exe$|\.bak$|\.swp$|((^|[/\\])\.[/\\]$)'
   noremap <silent> <leader>fp :FufFile Project-<CR>
   noremap <silent> <leader>ff :FufFile<CR>
   noremap <silent> <leader>fb :FufBuffer<CR>
@@ -835,7 +835,8 @@ map <leader>s? z=
   noremap <silent> <leader>fr :FuzzyFinderTextMateRefreshFiles<CR>
 
 
-  let g:fuzzy_ignore = "*.log;*.o;*.jpg;*.gif;*png;.svn;application/cache/**"
+  let g:fuzzy_ignore = "*.log;*.o;*.jpg;*.gif;*png;.svn;application/cache/**;gems;vendor;tmp;log"
+  " let g:fuzzy_ceiling = 20000
 
   """"""""""""""""""""""""""""""
   " => xml.vim
