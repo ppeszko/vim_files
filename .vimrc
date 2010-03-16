@@ -835,7 +835,7 @@ map <leader>s? z=
   noremap <silent> <leader>fr :FuzzyFinderTextMateRefreshFiles<CR>
 
 
-  let g:fuzzy_ignore = "*.log;*.o;*.jpg;*.gif;*png;.svn;application/cache/**;gems;vendor;tmp;log"
+  let g:fuzzy_ignore = "*.log;*.o;*.jpg;*.gif;*png;.svn;application/cache/**;gems/**;vendor/**;tmp/**;log/**"
   " let g:fuzzy_ceiling = 20000
 
   """"""""""""""""""""""""""""""
@@ -1074,6 +1074,7 @@ let g:xml_use_html = 1
 
 let g:rails_default_database="mysql"
 let g:rails_menu = 0
+let $TM_FILENAME='true'
 
 " jump to line at cursor
 map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
