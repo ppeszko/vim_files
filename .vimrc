@@ -111,13 +111,8 @@ nmap <F1> :w!<cr>
 imap <F1> <C-O>:w!<cr>
 "nmap <leader>f :find<cr>
 
-if has("win32")         " platform dependent
-  let $VIMDATA  = $HOME.'/vimdata'
-  let $VIMFILES = $HOME.'/vimfiles'
-else
-  let $VIMDATA  = $HOME.'/.vim/vimdata'
-  let $VIMFILES = $HOME.'/.vim'
-endif
+let $VIMDATA  = $HOME.'/.vim/vimdata'
+let $VIMFILES = $HOME.'/.vim'
                         " fast sourcing and editing of the .vimrc
 "map <leader>s :source $MYVIMRC<cr>
 map <leader>e :e! $MYVIMRC<cr>
@@ -126,7 +121,7 @@ au! BufWritePost [\._]vimrc source $MYVIMRC
 set pastetoggle=<F6>    " when pasting something in, don't indent
 set rtp+=$VIMDATA       " add this to rtp to satisfy getscript.vim
 set path=.,/usr/include/*, " where gf, ^Wf, :find will search
-set tags=./tags,tags,.tmtags,~/.ctags/tags" used by CTRL-] together with ctags
+set tags=./tags,tags,.tmtags,~/.ctags/tags,ctags,./ctags "used by CTRL-] together with ctags
 set makeef=error.err    " the errorfile for :make and :grep
 set ffs=unix,dos,mac    " behaves good under both linux/windows
 nmap <leader>fd :se ff=dos<cr>
@@ -138,9 +133,7 @@ nmap <leader>fu :se ff=unix<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable           " enable syntax hl
 
-if has("win32")
-  try | set gfn=Consolas:h11:cANSI | catch | endtry " Vista only
-elseif has("gui_gtk2")
+if has("gui_gtk2")
   set gfn="Consolas 12"
 else
   set gfn=Monaco:h12,Inconsolata:h14,Consolas:h13,PanicSans:h12
@@ -193,11 +186,6 @@ set runtimepath+=$VIMFILES/runtime/vimoutliner
 set runtimepath+=$VIMFILES/runtime/git-vim
 set runtimepath+=$VIMFILES/runtime/nerdtree
 " set runtimepath+=~/.vim/runtime/snipMate
-
-if has("win32")
-  set rtp+=$VIMFILES/runtime/win
-  runtime plugin/visual_studio.vim
-endif
 
 "runtime plugin/snipMate.vim
 "runtime after/plugin/snipMate.vim
@@ -610,29 +598,14 @@ map <leader>s? z=
   """"""""""""""""""""""""""""""
   " => grep.vim
   """"""""""""""""""""""""""""""
-  let Grep_Skip_Dirs = 'RCS CVS SCCS .svn'
-  let Grep_Skip_Files = '*.obj *.o tags .tmtags'
+  let Grep_Skip_Dirs = 'RCS CVS SCCS .svn .git tmp'
+  let Grep_Skip_Files = '*.obj *.o tags .tmtags ctags'
   let Grep_Default_Filelist = '*.[ch] *.cpp *.php *.html *.phtml *.rb *.erb'
 
   let Grep_Default_Options = '-i'
   if has("macunix") || has("gui_macvim")
     let Grep_Xargs_Options = '-0'
   endif
-
-
-  if has("win32")
-    let Grep_Path = 'c:\programme\gnuwin32\bin\grep.exe'
-    let Fgrep_Path = 'c:\programme\gnuwin32\bin\fgrep.exe'
-    let Egrep_Path = 'c:\programme\gnuwin32\bin\egrep.exe'
-    let Agrep_Path = 'c:\programme\gnuwin32\bin\agrep.exe'
-    let Grep_Find_Path = 'c:\programme\gnuwin32\bin\find.exe'
-    let Grep_Xargs_Path = 'c:\programme\gnuwin32\bin\xargs.exe'
-  endif
-
-
-  map <S-F3> :Rgrep<cr>
-  "let Grep_Cygwin_Find = 1
-  
 
   """"""""""""""""""""""""""""""
   " => tovl grep
@@ -664,11 +637,7 @@ map <leader>s? z=
   """"""""""""""""""""""""""""""
   " => taglist.vim
   """"""""""""""""""""""""""""""
-  if has("win32")
-    let Tlist_Ctags_Cmd = $VIMFILES.'\ctags.exe'
-  elseif has("mac")
-    let Tlist_Ctags_Cmd = '/opt/local/bin/ctags'
-  endif
+  let Tlist_Ctags_Cmd = '/opt/local/bin/ctags'
 
   let Tlist_Sort_Type = "name"         " order by name
   "let Tlist_Sort_Type = "order"
@@ -700,15 +669,6 @@ map <leader>s? z=
   """"""""""""""""""""""""""""""
   " => projtags.vim
   """"""""""""""""""""""""""""""
-  if has("win32")
-   " doesn't seem to work
-    let g:ProjTags = [["C:\Dev\Projects", "c:\dev\tags_psdk2003", "c:\dev\projects\integrator\tags"]]
-    set tags=./tags,tags,c:\Dev\Projects\Integrator\tags,c:\Dev\tags_psdk2003    " used by CTRL-] together with ctags
-  else
-    let g:ProjTags = [["~/Documents/Projects/Acculogic/Integrator", "~/Documents/Projects/Acculogic/Integrator/.tmtags"]]
-    let g:ProjTags += [["~/Sites/talentrun/talentrun", "~/Sites/talentrun/talentrun/.tmtags"]]
-    let g:ProjTags += [["~/Sites/Studiblock/Frameworks/cake", "~/Sites/Studiblock/Frameworks/cake/.tmtags"]]
-  endif
 
 
   """"""""""""""""""""""""""""""
@@ -730,14 +690,6 @@ map <leader>s? z=
   nmap <Leader>vU <Plug>VCSUnlock
   nmap <Leader>vv <Plug>VCSVimDiff
   nmap <Leader>vR <Plug>VCSRevert
-
-  " vcscommand.vim - svn executable path
-  if has("win32")
-    let g:VCSCommandSVNExec = 'C:\Programme\Subversion\svn.exe'
-  elseif has("macunix")
-    let g:VCSCommandSVNExec = '/opt/local/gentoo/usr/bin/svn'
-    let g:VCSCommandGitExec = '/opt/local/gentoo/usr/bin/git'
-  endif
 
   augroup VCSCommand
     au VCSCommand User VCSBufferCreated silent! nmap <unique> <buffer> q :bwipeout<cr>
@@ -835,7 +787,7 @@ map <leader>s? z=
   noremap <silent> <leader>fr :FuzzyFinderTextMateRefreshFiles<CR>
 
 
-  let g:fuzzy_ignore = "*.log;*.o;*.jpg;*.gif;*png;.svn;application/cache/**;gems/**;vendor/**;tmp/**;log/**"
+  let g:fuzzy_ignore = ".git/**;coverage/**;*.log;*.o;*.jpg;*.gif;*png;.svn;application/cache/**;gems/**;vendor/**;tmp/**;log/**"
   " let g:fuzzy_ceiling = 20000
 
   """"""""""""""""""""""""""""""
@@ -1076,6 +1028,8 @@ let g:rails_default_database="mysql"
 let g:rails_menu = 0
 let $TM_FILENAME='true'
 
+iab dbg require 'ruby-debug'; Debugger.start; debugger 
+
 " jump to line at cursor
 map <F5> [I:let nr = input("Which one: ") <Bar>exe "normal " . nr ."[\t"<CR>
 
@@ -1129,11 +1083,6 @@ endf
 
 "autocmd BufEnter * call CHANGE_CURR_DIR()
 
-
-if has("win32")
-  " windows ddk, driver develop kit
-  set makeprg=for\ \%c\ in\ (\"pushd\ .\"\ \"setenv\ D:\\foo\\WINDDK\\2600\ chk\"\ \"popd\"\ \"build\ -cZ\"\ \"copy\ i386\\ds30xx.sys\ e:\\work\\X\\i386\")\ do\ call\ \%~c
-endif
 
 "if filereadable($VIMDATA."/session.vim")
 "  au VimEnter * so $VIMDATA/session.vim
