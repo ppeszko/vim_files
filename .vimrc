@@ -937,6 +937,11 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Cucumber
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype plugin indent on
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc: {{{1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Development
