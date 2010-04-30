@@ -126,6 +126,12 @@ set makeef=error.err    " the errorfile for :make and :grep
 set ffs=unix,dos,mac    " behaves good under both linux/windows
 nmap <leader>fd :se ff=dos<cr>
 nmap <leader>fu :se ff=unix<cr>
+
+" full screen is working on macvim
+if has("gui_running")
+  set fuoptions=maxvert,maxhorz
+endif
+
 " }}}1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
